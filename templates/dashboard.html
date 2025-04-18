@@ -1,0 +1,11 @@
+<h2>Teacher Dashboard</h2>
+<ul>
+  {% for sub in submissions %}
+    <li>
+      {{ sub.student }} - <a href="/download/{{ sub.filename }}">{{ sub.filename }}</a> -
+      Grade: {{ sub.grade or "Not graded" }} -
+      <a href="/grade/{{ sub._id }}">Grade</a>
+    </li>
+  {% endfor %}
+</ul>
+<a href="/logout">Logout</a>
