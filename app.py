@@ -28,7 +28,7 @@ def login():
         return "Invalid credentials"
     return render_template('login.html')
 
-@app.route('/dashboard')
+'''@app.route('/dashboard')
 def dashboard():
     if 'username' not in session:
         return redirect(url_for('login'))
@@ -36,6 +36,17 @@ def dashboard():
     if session['role'] == 'teacher':
         all_submissions = submissions.find()
         return render_template('dashboard.html', submissions=all_submissions)
+    return render_template('upload.html')'''
+
+@app.route('/dashboard')
+def dashboard():
+    if 'username' not in session:
+        return redirect(url_for('login'))
+
+    if session['role'] == 'teacher':
+        all_submissions = submissions.find()
+        uploaded_files = os.listdir(app.config['UPLOAD_FOLDER'])
+        return render_template('dashboard.html', submissions=all_submissions, files=uploaded_files)
     return render_template('upload.html')
 
 @app.route('/upload', methods=['POST'])
